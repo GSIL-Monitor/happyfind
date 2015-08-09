@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dkq.mapper.DictAdPriceMapper">
+	
+	<resultMap id="DictAdPriceMap" type="dkq.entity.DictAdPrice">
+		<result property="id" column="id" />
+		<result property="siteId" column="site_id" />
+		<result property="siteName" column="site" />
+		<result property="channelId" column="channel_id" />
+		<result property="channelName" column="channel" />
+		<result property="systypeName" column="systype" />
+		<result property="systypeId" column="systype_id" />
+		<result property="startTime" column="startTime" />
+		<result property="endTime" column="endTime" />
+		<result property="price" column="price" />
+		<result property="subUser" column="subUser" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+	</resultMap>
+	
+	  
+
+	<insert id="addEntity" parameterType="DictAdPrice">
+		INSERT INTO dict_ad_price(
+		id,site_id,channel_id,systype_id,startTime,endTime,price,subUser,createTime,updateTime) VALUES (
+		SYS_DICT_IDSQS.nextval,
+		#{siteId},
+		#{channelId},
+		#{systypeId},
+		#{startTime},
+		#{endTime},
+		#{price},
+		#{subUser},
+		#{createTime},
+		#{updateTime}
+		)
+	</insert>
+	
+	<!-- 更新一条记录 -->  
+    <update id="updateEntity"  parameterType="DictAdPrice">  
+        UPDATE dict_ad_price SET site_id=#{siteId},channel_id=#{channelId},systype_id=#{systypeId},
+        startTime=#{startTime},endTime=#{endTime},
+        price=#{price},subUser=#{subUser},
+        subUser=#{subUser},
+        updateTime=#{updateTime} 
+        where id = #{id} 
+    </update>  
+	
+	<select id="getList" resultMap="DictAdPriceMap" parameterType="DictAdPrice">
+		select t.*,d.site as site,dc.channel as channel,s.systype as systype from DICT_AD_PRICE t join dm_site d on t.site_id=d.SITE_ID join DM_SYSTYPE s on t.SYSTYPE_ID=s.SYSTYPE_ID join dm_channel dc on t.CHANNEL_ID = dc.channel_id where 1=1
+		<if test="channelId!=0"> and t.channel_id=#{channelId} </if>
+	    <if test="systypeId!=0"> and t.systype_id=#{systypeId} </if>
+	</select>
+
+	<select id="getEntityByid" parameterType="int"  resultMap="DictAdPriceMap">
+		SELECT * FROM dict_ad_price WHERE id = #{id}
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="int">
+		DELETE FROM dict_ad_price WHERE id = #{id}
+	</delete>
+
+</mapper>

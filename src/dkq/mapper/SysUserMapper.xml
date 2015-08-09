@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dkq.mapper.SysUserMapper">
+
+    <!--<resultMap id="sysRoleMap" type="SysRole">
+        <id property="roleid" column="ROLE_ID"/>
+        <result property="rolename" column="ROLE_NAME"/>
+        <result property="roledesc" column="ROLE_DESC"/>
+    </resultMap>--> 
+    
+    <resultMap type="dkq.entity.SysDeptUser" id="sysDeptUserMap">
+     <result property="dept_id" column="DEPT_ID"/>
+     <result property="dept_name" column="DEPT_NAME"/>
+     <result property="user_id" column="USER_ID" />
+	 <result property="username" column="USERNAME" />
+    </resultMap>
+    
+    <resultMap type="dkq.entity.SysDept" id="sysDeptMap">
+     <result property="deptid" column="DEPT_ID"/>
+     <result property="deptname" column="DEPT_NAME"/>
+     <result property="deptdesc" column="DEPT_DESC"/> 
+    </resultMap>
+    
+	<resultMap id="SysUserMap" type="dkq.entity.SysUser">
+		<result property="userid" column="USER_ID" />
+		<result property="username" column="USERNAME" />
+		<result property="password" column="PASSWORD" />
+		<result property="email" column="EMAIL" />
+		<result property="chennelid" column="CHENNEL_ID" />
+		<result property="status" column="STATUS" />
+		<result property="userjob" column="userjob" />
+		<result property="applydesc" column="applydesc" />
+		<result property="applychannel" column="applychannel" />
+		<!--
+		<result property="deptid" column="DEPT_ID" /><result property="roleid" column="ROLE_ID" />
+		<association property="sysRole" javaType="SysRole" resultMap="sysRoleMap"/> --> 
+		 <association property="sysDept" javaType="SysDept">
+             <id property="deptid" column="DEPT_ID"/>
+             <result property="deptname" column="DEPT_NAME"/>
+             <result property="deptdesc" column="DEPT_DESC"/> 
+         </association>
+		 <association property="sysRole" javaType="SysRole">
+             <id property="roleid" column="ROLE_ID"/>
+             <result property="rolename" column="ROLE_NAME"/>
+             <result property="roledesc" column="ROLE_DESC"/> 
+         </association>
+	</resultMap>
+	
+<!-- DM_channel -->
+
+	    <resultMap type="dkq.entity.DmChannel" id="DmChannelMap">
+	     <result property="channel_id" column="channel_id"/>
+	     <result property="channel" column="channel"/>
+	     <result property="site_id" column="site_id" />
+		 <result property="site_name" column="site_name" />
+	    </resultMap>
+	
+	<insert id="addEntity" parameterType="SysUser">
+		INSERT INTO SYS_USER(
+		USER_ID,
+		USERNAME,
+		EMAIL,
+		STATUS,
+		USERJOB,
+		APPLYDESC,
+		APPLYCHANNEL
+		)
+		VALUES (
+		SYS_USER_IDSQS.nextval,
+		#{username},
+		#{email},
+		#{status},
+		#{userjob},
+		#{applydesc},
+		#{applychannel}
+		)
+	</insert>
+	
+	<!-- 更新一条记录  SELECT * FROM SYS_USER -->  
+    <update id="updateEntity" parameterType="SysUser">  
+        UPDATE SYS_USER SET  USER_ID = #{userid} 
+   		<if test="username!=null"> , USERNAME=#{username} </if>
+   		<if test="password!=null"> , PASSWORD=#{password} </if>
+   		<if test="email!=null"> , EMAIL=#{email} </if>
+   		<if test="chennelid!=null"> , CHENNEL_ID=#{chennelid} </if>
+   		<if test="status!=null"> , STATUS=#{status} </if>
+   		<if test="roleid!=null"> , ROLE_ID=#{roleid} </if>
+   		<if test="userjob!=null"> , userjob=#{userjob} </if>
+   		<if test="applydesc!=null"> , applydesc=#{applydesc} </if>
+   		<if test="applychannel!=null"> , applychannel=#{applychannel} </if>
+   		where USER_ID = #{userid} 
+    </update>  
+	
+	<select id="getDeptUserList" resultMap="sysDeptUserMap" >
+		select d.dept_id,d.dept_name,u.user_id,u.USERNAME,u.user_id from sys_user u,sys_dept d where u.dept_id=d.dept_id and d.dept_id=1
+	</select>
+	
+	<select id="getDeptList" resultMap="sysDeptMap" >
+		select * from sys_dept r 
+	</select>
+	<select id="getChannelList" resultMap="DmChannelMap" >
+		select * from dm_channel r 
+	</select>
+	
+	<select id="getList" parameterType="SysUser" resultMap="SysUserMap" >
+		select * from sys_user u left join sys_role r on(u.role_id=r.role_id)  where 1=1
+		<if test="username!=null and username!=''"> and u.EMAIL like '%'||#{username}||'%' </if>
+		<if test="deptid!=0"> and u.dept_id=#{deptid} </if>
+	    <if test="roleid!=0"> and u.role_id=#{roleid} </if>
+	</select>
+	
+	<select id="getuserroleList" resultMap="SysUserMap" >
+		select * from sys_user u,sys_role r where u.role_id=r.role_id 
+	    <if test="deptid!=0"> and u.dept_id=#{deptid} </if>
+	    <if test="roleid!=0"> and u.role_id=#{roleid} </if>
+	</select>
+
+	<select id="getEntity" parameterType="int"  resultMap="SysUserMap">
+		SELECT * FROM SYS_USER WHERE USER_ID = #{id}
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="int">
+		DELETE FROM SYS_USER WHERE USER_ID = #{id}
+	</delete>
+	
+	<select id="getLogonUser" parameterType="string" resultMap="SysUserMap">
+		SELECT * FROM SYS_USER WHERE USERNAME = #{username} and PASSWORD=#{password}
+	</select>
+	
+    <update id="chgstatu" parameterType="int">  
+        UPDATE SYS_USER SET STATUS=#{status} where USER_ID = #{userid}
+    </update>  
+	
+</mapper>

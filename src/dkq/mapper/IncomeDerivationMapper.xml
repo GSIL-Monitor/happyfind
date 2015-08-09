@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dkq.mapper.IncomeDerivationMapper">
+	
+	
+	
+	<resultMap id="IncomeDerivationMap" type="dkq.entity.IncomeDerivation">
+		<result property="id" column="id" />
+		<result property="channelId" column="channel_id" />
+		<result property="channelName" column="channel" />
+		<result property="showid" column="showid" />
+		<result property="showName" column="showname" />
+		<result property="startTime" column="startTime" />
+		<result property="endTime" column="endTime" />
+		<result property="income" column="income" />
+		<result property="subUser" column="subUser" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+	</resultMap>
+	
+	  
+
+	<insert id="addEntity" parameterType="IncomeDerivation">
+		INSERT INTO CES_INCOME_DERIVATION(
+		id,channel_Id,channel,showid,showname,startTime,endTime,income,subUser,createTime,updateTime) VALUES (
+		SYS_INCOME_IDSQS.nextval,
+		#{channelId},
+		#{channelName},
+		#{showid},
+		#{showName},
+		#{startTime},
+		#{endTime},
+		#{income},
+		#{subUser},
+		#{createTime},
+		#{updateTime}
+		)
+	</insert>
+	
+	<!-- 更新一条记录 -->  
+    <update id="updateEntity"  parameterType="IncomeDerivation">  
+        UPDATE dict_ad_price SET channel_Id=#{channelId},
+        channel=#{channel},showid=#{showid},showName=#{showName},
+        startTime=#{startTime},endTime=#{endTime},income=#{income},
+        subUser=#{subUser},createTime=#{createTime},updateTime=#{updateTime}
+        where id = #{id}  
+    </update>  
+	
+	<select id="getList" resultMap="IncomeDerivationMap" parameterType="IncomeDerivation">
+		select t.* from CES_INCOME_DERIVATION t where 1=1
+		<if test="channelId!=0"> and t.channel_id=#{channelId} </if>
+		
+	</select>
+
+	<select id="getEntityByid" parameterType="int"  resultMap="IncomeDerivationMap">
+		SELECT * FROM dict_ad_price WHERE id = #{id}
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="int">
+		DELETE FROM dict_ad_price WHERE id = #{id}
+	</delete>
+
+</mapper>

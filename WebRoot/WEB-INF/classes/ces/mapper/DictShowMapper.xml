@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ces.mapper.DictShowMapper">
+	<resultMap id="dictShowMap" type="ces.entity.DictShow">
+		<result property="id" column="id" />
+		<result property="site_id" column="site_id" />
+		<result property="showid" column="showid" />
+		<result property="show_name" column="show_name" />
+		<result property="analyst_type" column="analyst_type" />
+		<result property="url" column="url" />
+		<result property="stat" column="stat" />
+		<result property="up_date" column="up_date" />
+		<result property="down_date" column="down_date" />
+		<result property="create_time" column="create_time" />
+		<result property="analyst_owner" column="analyst_owner" />
+		<result property="channel_id" column="channel_id" />
+		<result property="episode" column="episode" />
+		<result property="estimate_vv" column="estimate_vv" />
+		<result property="cr_cost" column="cr_cost" />
+		<result property="pay_flag" column="pay_flag" />
+		<result property="pay_period" column="pay_period" />
+		<result property="divide_flag" column="divide_flag" />
+		
+	</resultMap>
+	
+	<insert id="addEntity" parameterType="dictShow">
+		INSERT INTO DICT_SHOWID(
+		id,site_id,showid,show_name,analyst_type,url,stat,up_date,down_date,create_time,analyst_owner,channel_id,episode,estimate_vv,cr_cost,pay_flag,pay_period,divide_flag) VALUES (
+		DICT_SHOWID_IDSQS.nextval,#{site_id},#{showid},#{show_name},#{analyst_type},#{url},#{stat},#{up_date},#{down_date},sysdate,#{analyst_owner},#{channel_id},#{episode},#{estimate_vv},#{cr_cost},#{pay_flag},#{pay_period},#{divide_flag}
+		)
+	</insert>
+	
+	<!-- 更新一条记录 -->  
+    <update id="updateEntity"  parameterType="dictShow">  
+        UPDATE DICT_SHOWID SET menu_name=#{menuname},menu_desc=#{menudesc},parent_id=#{parentid} where USER_ID = #{menuid}
+    </update>  
+	
+	<select id="getList" resultMap="dictShowMap" >
+		SELECT * FROM DICT_SHOWID
+	</select>
+
+	<select id="getEntityByid" parameterType="int"  resultMap="dictShowMap">
+		SELECT * FROM DICT_SHOWID WHERE id = #{id}
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="int">
+		DELETE FROM DICT_SHOWID WHERE id = #{id}
+	</delete>
+
+	
+</mapper>

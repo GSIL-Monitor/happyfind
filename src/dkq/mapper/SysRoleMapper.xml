@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dkq.mapper.SysRoleMapper">
+
+	<resultMap id="SysRoleMap" type="dkq.entity.SysRole">
+		<id property="roleid" column="ROLE_ID" />
+		<result property="rolename" column="ROLE_NAME" />
+		<result property="roledesc" column="ROLE_DESC" />
+	</resultMap>
+    <resultMap id="roleMenuMap" type="SysRole" extends="SysRoleMap">  
+        <collection property="menus" ofType="SysMenu">  
+			<id property="menuid" column="menu_id" />
+			<result property="menuname" column="menu_name" />
+			<result property="menudesc" column="menu_desc" />
+			<result property="parentid" column="parent_id" />
+			<result property="lever" column="lever" />
+        </collection>  
+    </resultMap>
+
+	<resultMap id="sysMenuMap" type="dkq.entity.SysMenu">
+		<result property="menuid" column="menu_id" />
+		<result property="menuname" column="menu_name" />
+		<result property="menudesc" column="menu_desc" />
+		<result property="parentid" column="parent_id" />
+		<result property="lever" column="lever" />
+	</resultMap>
+
+	<insert id="addEntity" parameterType="SysRole">
+		INSERT INTO SYS_ROLE(
+		ROLE_ID,
+		ROLE_NAME,
+		ROLE_DESC
+		)
+		VALUES (
+		SYS_ROLE_SQS.nextval,
+		#{rolename},
+		#{roledesc}
+		)
+	</insert>
+	
+	<!-- 更新一条记录 -->  
+    <update id="updateEntity" parameterType="SysRole">  
+        UPDATE SYS_ROLE SET ROLE_NAME=#{rolename},ROLE_DESC=#{roledesc} where ROLE_ID = #{roleid}  
+    </update>  
+	
+	<select id="getList" resultMap="SysRoleMap" >
+		SELECT * FROM SYS_ROLE
+	</select>
+
+	<select id="getEntityByid" parameterType="int"  resultMap="SysRoleMap">
+		SELECT * FROM SYS_ROLE WHERE ROLE_ID = #{id}
+	</select>
+	
+	<select id="getEntityByname" parameterType="string"  resultMap="SysRoleMap">
+		SELECT * FROM SYS_ROLE WHERE ROLE_NAME = #{rolename}
+	</select>
+	
+	<select id="getRoleMenuList" parameterType="int"  resultMap="roleMenuMap">
+		select t.*,m.* from sys_role t left join sys_role_menu r on(t.role_id=r.role_id) left join sys_menu m on(r.menu_id=m.menu_id) 
+		<if test="id!=null">where rm.role_id=#{id}</if>
+	</select>
+	
+	<select id="getMenuList" parameterType="int"  resultMap="sysMenuMap">
+		select t.* from sys_menu t 
+	</select>
+	
+	<select id="getMenuList_back" parameterType="int"  resultMap="sysMenuMap">
+		select t.* from sys_menu t where t.menu_id not in(select distinct rm.menu_id from SYS_ROLE_MENU rm where rm.role_id=#{id})
+	</select>
+	
+	<insert id="addRoleMenu" parameterType="int">  
+        insert into SYS_ROLE_MENU(ROLE_ID,MENU_ID) values(#{roleid},#{menuid})
+    </insert>
+	
+	<!-- 删除信息 -->
+	<delete id="deletRoleMenu" parameterType="string">
+		DELETE FROM SYS_ROLE_MENU WHERE ROLE_ID = #{roleid}
+	</delete>
+	
+	<!-- 删除信息 -->
+	<delete id="deleteRoleMenu" parameterType="string">
+		DELETE FROM SYS_ROLE_MENU WHERE ROLE_ID = #{roleid} and MENU_ID IN(#{menuids})
+	</delete>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="string">
+		DELETE FROM SYS_ROLE WHERE ROLE_ID = #{id}
+	</delete>
+	
+</mapper>

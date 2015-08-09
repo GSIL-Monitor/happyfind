@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dkq.mapper.SysMenuMapper">
+
+	<resultMap id="SysMenuMap" type="dkq.entity.SysMenu">
+		<result property="menuid" column="menu_id" />
+		<result property="menuname" column="menu_name" />
+		<result property="menudesc" column="menu_desc" />
+		<result property="parentid" column="parent_id" />
+		<result property="lever" column="lever" />
+	</resultMap>
+	
+    <resultMap id="menuRoleMap" type="SysMenu" extends="SysMenuMap">  
+        <collection property="roles" ofType="SysRole">  
+			<id property="roleid" column="ROLE_ID" />
+			<result property="rolename" column="ROLE_NAME" />
+			<result property="roledesc" column="ROLE_DESC" />
+        </collection>  
+    </resultMap>
+
+	<insert id="addEntity" parameterType="SysMenu">
+		INSERT INTO SYS_MENU(
+		menu_id,menu_name,menu_desc,parent_id,lever) VALUES (
+		SYS_MENU_IDSQS.nextval,
+		#{menuname},
+		#{menudesc},
+		#{parentid},
+		#{lever}
+		)
+	</insert>
+	
+	<!-- 更新一条记录 -->  
+    <update id="updateEntity"  parameterType="SysMenu">  
+        UPDATE SYS_MENU SET menu_name=#{menuname},menu_desc=#{menudesc},parent_id=#{parentid} where USER_ID = #{menuid}  
+    </update>  
+	
+	<select id="getList" resultMap="SysMenuMap" >
+		SELECT * FROM SYS_MENU
+	</select>
+	
+	<select id="getParentList" resultMap="SysMenuMap" >
+		SELECT * FROM SYS_MENU where lever=#{lever}
+	</select>
+
+	<select id="getEntityByid" parameterType="int"  resultMap="SysMenuMap">
+		SELECT * FROM SYS_MENU WHERE menu_id = #{id}
+	</select>
+	
+	<select id="getMenuRoleListbyroleid" parameterType="int"  resultMap="menuRoleMap">
+		select m.*,rmr.role_id,rmr.role_name,rmr.role_desc from sys_menu m left join(
+		select r.role_id,r.role_name,r.role_desc, rm.menu_id
+  		from sys_role r
+  		join sys_role_menu rm
+    	on (r.role_id = rm.role_id)
+ 		where rm.role_id = #{id}) rmr on m.menu_id=rmr.menu_id
+		
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delEntity" parameterType="int">
+		DELETE FROM SYS_MENU WHERE menu_id = #{id}
+	</delete>
+
+	
+</mapper>
