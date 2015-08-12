@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyview.mapper.RewardInformationMapper">
+	
+	<resultMap id="RewardInformationMapper" type="happyview.entity.RewardInformation">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="idCard" column="id_card" />
+		<result property="loantime" column="loan_time" />
+		<result property="loanmount" column="loan_mount" />
+		<result property="releasetime" column="release_time" />
+		<result property="rewardamount" column="reward_amount" />
+		<result property="contactnumber1" column="contact_number1" />
+		<result property="contactnumber2" column="contact_number2" />
+		<result property="contactnumber3" column="contact_number3" />
+		<result property="type" column="type" />
+		<result property="moduser" column="moduser" />
+		<result property="modtime" column="modtime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="RewardInformationMapper"  parameterType="RewardInformation">
+	      select * from reward_information where deleteFlag is null
+	      <if test="name!=null and name !=''"> and name = #{name}	</if>
+	      <if test="type!=null and type !=''"> and type = #{type}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="RewardInformation">
+		INSERT INTO reward_information(name,id_card,loan_time,loan_mount,release_time,reward_amount,contact_number1,contact_number2,contact_number3,type,moduser,modtime,updateTime,deleteFlag)
+		VALUES (
+		#{name},#{idCard},#{loantime},#{loanmount},#{releasetime},#{rewardamount},#{contactnumber1},#{contactnumber2},#{contactnumber3},#{type},#{moduser},#{modtime},#{updateTime},#{deleteFlag}	)
+	</insert>
+	
+	<update id="updateEntity"  parameterType="RewardInformation">  
+        UPDATE reward_information SET 
+        name=#{name},id_card=#{idCard},status=#{status},
+        source=#{source},modtime=#{modtime},
+        moduser=#{moduser},updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="BorrowInformation">  
+        UPDATE borrow_information SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="BorrowInformationMapp"  parameterType="int">
+	      select * from borrow_information where deleteFlag is null
+	      <if test="borrowId!=0"> and id = #{borrowId}	</if>
+	</select>
+     
+</mapper>
