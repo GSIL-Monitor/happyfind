@@ -16,7 +16,7 @@ public class RewardInformationServiceImpl implements RewardInformationServiceI {
 	private RewardInformationMapper RewardInformationMapper;
 	
 	@Autowired
-	public void setUserInteractMapper(RewardInformationMapper RewardInformationMapper) {
+	public void setRewardMapper(RewardInformationMapper RewardInformationMapper) {
 		this.RewardInformationMapper = RewardInformationMapper;
 	}
 	

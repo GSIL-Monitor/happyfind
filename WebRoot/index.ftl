@@ -36,6 +36,9 @@ function openiframe(id,url){
                 	<li><span>领赏信息审核</span><i class="four"></i></li>
                 	<li><span>企业收费管理</span><i class="four"></i></li>
                 	<li><span>平台账户查看</span><i class="four"></i></li>
+                	<li><span>==========================</li>
+                	<li onclick='openiframe("xindai","viewAction!toPageList?pageName=reward")'><span  id="xindai" >信贷信息录入</span><i class="four"></i></li>
+                	
                 </ul>
             </div>
       </div>
