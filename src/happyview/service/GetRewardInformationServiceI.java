@@ -1,25 +1,17 @@
-package happyview.mapper;
+package happyview.service;
 
 import java.util.List;
 
-
-
-import org.apache.ibatis.annotations.Param;
-
 import happyview.entity.GetRewardInformation;
 
-public interface GetRewardInformationMapper {
+public interface GetRewardInformationServiceI {
 	
-	/**
-	 * 
-	 * @return
-	 */
+
 	public List<GetRewardInformation> getList(GetRewardInformation grf);
-	
 	public void addEntity(GetRewardInformation grf);
 	public void updateEntity(GetRewardInformation grf);
-	public GetRewardInformation getEntityById(@Param("getrewardId")int getrewardId);
+	public GetRewardInformation getEntityById(int getrewardId);
 	public void deleteEntity(GetRewardInformation grf);
 	
-	
+
 }

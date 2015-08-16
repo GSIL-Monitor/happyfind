@@ -10,6 +10,10 @@
 		<result property="loanmount" column="loan_mount" />
 		<result property="releasetime" column="release_time" />
 		<result property="rewardamount" column="reward_amount" />
+		<result property="arrearsamount" column="arrears_amount" />
+		<result property="contactnumber1" column="contact_number1" />
+		<result property="contactnumber2" column="contact_number2" />
+		<result property="contactnumber3" column="contact_number3" />
 		<result property="type" column="type" />
 		<result property="moduser" column="moduser" />
 		<result property="modtime" column="modtime" />
@@ -27,11 +31,10 @@
 
 	<insert id="addEntity" parameterType="RewardInformation">
 		INSERT INTO reward_information(name,id_card,loan_time,loan_mount,release_time,
-		reward_amount,type,moduser,
-		modtime,updateTime,deleteFlag)
+		reward_amount,arrears_amount,contact_number1,contact_number2,contact_number3,type,moduser,modtime,updateTime,deleteFlag)
 		VALUES (
 		#{name},#{idCard},#{loantime},#{loanmount},#{releasetime},
-		#{rewardamount},
+		#{rewardamount},#{arrearsamount},#{contactnumber1},#{contactnumber2},#{contactnumber3},
 		#{type},#{moduser},#{modtime},#{updateTime},#{deleteFlag}	)
 	</insert>
 	
@@ -39,7 +42,8 @@
         UPDATE reward_information SET 
         name=#{name},id_card=#{idCard},loan_time=#{loantime},
         loan_mount=#{loan_mount},release_time=#{releasetime},
-        reward_amount=#{rewardamount},type=#{type},
+        reward_amount=#{rewardamount},arrears_amount=#{arrearsamount},contact_number1=#{contactnumber1},
+        contact_number2=#{contactnumber2},contact_number3=#{contactnumber3},type=#{type},
         moduser=#{moduser},modtime=#{modtime},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
         where id = #{id} 
     </update> 

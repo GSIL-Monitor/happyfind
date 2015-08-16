@@ -27,35 +27,35 @@ public class RewardInformationServiceImpl implements RewardInformationServiceI {
 
 
 	@Override
-	public List<RewardInformation> getList(RewardInformation bf) {
-		return RewardInformationMapper.getList(bf);
+	public List<RewardInformation> getList(RewardInformation rf) {
+		return RewardInformationMapper.getList(rf);
 	}
 
 
 	@Override
-	public void addEntity(RewardInformation bf) {
-		RewardInformationMapper.addEntity(bf);
+	public void addEntity(RewardInformation rf) {
+		RewardInformationMapper.addEntity(rf);
 		
 	}
 	
 	@Override
-	public void updateEntity(RewardInformation bf) {
-		RewardInformationMapper.updateEntity(bf);
+	public void updateEntity(RewardInformation rf) {
+		RewardInformationMapper.updateEntity(rf);
 		
 	}
 
 
 	@Override
-	public RewardInformation getEntityById(int rewardId) {
+	public RewardInformation getEntityById(int getrewardId) {
 		// TODO Auto-generated method stub
-		return RewardInformationMapper.getEntityById(rewardId);
+		return RewardInformationMapper.getEntityById(getrewardId);
 	}
 
 
 	@Override
-	public void deleteEntity(RewardInformation bf) {
+	public void deleteEntity(RewardInformation rf) {
 		// TODO Auto-generated method stub
-		RewardInformationMapper.deleteEntity(bf);
+		RewardInformationMapper.deleteEntity(rf);
 	}
 
 

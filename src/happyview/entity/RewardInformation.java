@@ -7,7 +7,11 @@ public class RewardInformation {
 	private String loantime;//贷款时间
 	private String loanmount;//贷款金额
 	private String releasetime; //发布日期
-	private String rewardamount;  //悬赏金额  
+	private String rewardamount;  //悬赏金额
+	private String arrearsamount; //欠款金额
+	private String contactnumber1;  //
+	private String contactnumber2;   
+	private String contactnumber3;  
 	private String type;   //分为个人和机构
 	private String moduser;  //
 	private String modtime; //
@@ -86,6 +90,30 @@ public class RewardInformation {
 	}
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+	public String getContactnumber1() {
+		return contactnumber1;
+	}
+	public void setContactnumber1(String contactnumber1) {
+		this.contactnumber1 = contactnumber1;
+	}
+	public String getContactnumber2() {
+		return contactnumber2;
+	}
+	public void setContactnumber2(String contactnumber2) {
+		this.contactnumber2 = contactnumber2;
+	}
+	public String getContactnumber3() {
+		return contactnumber3;
+	}
+	public void setContactnumber3(String contactnumber3) {
+		this.contactnumber3 = contactnumber3;
+	}
+	public String getArrearsamount() {
+		return arrearsamount;
+	}
+	public void setArrearsamount(String arrearsamount) {
+		this.arrearsamount = arrearsamount;
 	}
 	
 	

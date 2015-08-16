@@ -1,8 +1,10 @@
 package happyview.action;
 
 import happyview.entity.RewardInformation;
+import happyview.entity.GetRewardInformation;
 import happyfind.entity.SystemLog;
 import happyview.service.RewardInformationServiceI;
+import happyview.service.GetRewardInformationServiceI;
 import happyfind.service.SystemLogServiceI;
 import happyfind.utils.CommonData;
 
@@ -20,17 +22,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @ParentPackage(value="basePackage")
 @Namespace("/")
-@Action(value="viewAction")
+@Action(value="RewardAction")
 @Results(value = {
 @Result(name ="reward", location = "/view/rewardList.ftl"),
 @Result(name ="addReward", location = "/view/addReward.ftl"),
 })
-public class ViewAction {
+public class RewardAction {
 	
 	//参数
 	private String pageName;
 	private int rewardId;
-	private RewardInformation bf = new RewardInformation();
+	private RewardInformation rf = new RewardInformation();
 	private RewardInformationServiceI RewardInformationService;
 	
 	private SystemLog log = new SystemLog();
@@ -44,34 +46,35 @@ public class ViewAction {
 	String dateTimes = df.format(dateTime);
 	
 	public String toPageList(){
-		rewardlist=RewardInformationService.getList(bf);
+		rewardlist=RewardInformationService.getList(rf);
 		return pageName;
 	}
 	public String toPage(){
 		if(pageName.equals("update")){
-			bf=RewardInformationService.getEntityById(rewardId);
+			rf=RewardInformationService.getEntityById(rewardId);
 		}
 		return pageName;
 	}
 	public String addReward(){
-		bf.setUpdateTime(dateTimes);
+		rf.setUpdateTime(dateTimes);
 		String logKey=CommonData.ADDREWARD;
-		if(bf.getId()==0){
-			RewardInformationService.addEntity(bf);
+		if(rf.getId()==0){
+			RewardInformationService.addEntity(rf);
 			systemLogService.addEntity(log);
 		}else{
-			logKey=CommonData.UPDATEBORROW;
-			RewardInformationService.updateEntity(bf);
+			logKey=CommonData.UPDATEREWARD;
+			RewardInformationService.updateEntity(rf);
 		}
-		log=getLogDate(bf.getModuser(),logKey,bf.getIdCard());
+		log=getLogDate(rf.getModuser(),logKey,rf.getIdCard());
+		
 		return pageName;
 	}
 	
-	public void deleteBorrow(){
-		bf.setUpdateTime(dateTimes);
-		bf.setDeleteFlag("1");
-		bf.setId(rewardId);
-		RewardInformationService.deleteEntity(bf);
+	public void deleteReward(){
+		rf.setUpdateTime(dateTimes);
+		rf.setDeleteFlag("1");
+		rf.setId(rewardId);
+		RewardInformationService.deleteEntity(rf);
 	}
 
 	public SystemLog getLogDate(String LogUser,String logType,String logKey){
@@ -109,16 +112,16 @@ public class ViewAction {
 		return rewardlist;
 	}
 
-	public void setBorrowlist(List<RewardInformation> rewardlist) {
+	public void setRewardlist(List<RewardInformation> rewardlist) {
 		this.rewardlist = rewardlist;
 	}
 
-	public RewardInformation getBf() {
-		return bf;
+	public RewardInformation getRf() {
+		return rf;
 	}
 
-	public void setBf(RewardInformation bf) {
-		this.bf = bf;
+	public void setRf(RewardInformation rf) {
+		this.rf = rf;
 	}
 	public int getrewardId() {
 		return rewardId;

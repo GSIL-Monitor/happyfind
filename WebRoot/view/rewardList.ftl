@@ -16,28 +16,43 @@
      <div class="space"></div>
     	<div class="mode">
 	    	<div class="theme">
-	    	
-            <input type="button" id="submitbtidborrow" class="btn " value="添加信息"  onclick="addReward()"/>		
+	    	<form id="rewardForm" method="post" action="${request.contextPath}/RewardAction!toPageList?pageName=reward">
+	    	<span class="title">
+	                	姓名：<input name="rf.name" type="text" value="${rf.name!}" class="defText1">
+	                	身份证号码：<input name="rf.idCard" type="text" value="${rf.idCard!}" class="defText1">
+	                	</span>
+            			<input type="button" id="submitbtidborrow" class="btn" value="查&nbsp;&nbsp;&nbsp;询" onclick="subborrow()"/>
+            			<input type="button" id="submitbtidborrow" class="btn " value="添加信息"  onclick="addReward()"/>
+            </form>
+            	
 	         </div>
                 <div class="datatbl">
                 	<table>
                     	<tr class="bg">
                         	<th>姓名</th>
-                        	<th>ID</th>
-                        	<th>状态</th>
-                        	<th>时间</th>
-                        	<th>来源</th>
+                        	<th>身份证号码</th>
+                        	<th>贷款时间</th>
+                        	<th>贷款金额</th>
+                        	<th>发布日期</th>
+                        	<th>悬赏金额</th>
+                        	<th>联系方式1</th>
+                        	<th>联系方式2</th>
+                        	<th>联系方式3</th>
                         	<th>操作</th>
                         </tr>
                         <#list rewardlist as reward>
                     <tr>
-                        <td>${reward.id!}</td>
-                        <td>${reward.id!}</td>
-                        <td>${reward.id!}</td>
-                        <td>${reward.id!}</td>
-                        <td>${reward.id!}</td>
-                        <td><img src="image/0812309.png" class="update" onclick="updateborrow('${borrow.id!}')" title="修改"></img>
-                        		<img src="image/delete.png" class="delete" onclick="deleteborrow('${borrow.id!}')"  title="删除"></img></td>
+                        <td>${reward.name!}</td>
+                        <td>${reward.idCard!}</td>
+                        <td>${reward.loantime!}</td>
+                        <td>${reward.loanmount!}</td>
+                        <td>${reward.releasetime!}</td>
+                        <td>${reward.rewardamount!}</td>
+                        <td>${reward.contactnumber1!}</td>
+                        <td>${reward.contactnumber2!}</td>
+                        <td>${reward.contactnumber3!}</td>
+                        <td><img src="image/0812309.png" class="update" onclick="updatereward('${reward.id!}')" title="修改"></img>
+                        		<img src="image/delete.png" class="delete" onclick="deletereward('${reward.id!}')"  title="删除"></img></td>
                     </tr>
                      </#list>
                     </table>
@@ -52,35 +67,35 @@
   </body>
 </html>
 <script>
-function subborrow(){
-	$("#borrowForm").submit();
+function subreward(){
+	$("#rewardForm").submit();
 }
 
 function addReward(){
-			var url="${request.contextPath}/viewAction!toPage?pageName=addReward";
+			var url="${request.contextPath}/RewardAction!toPage?pageName=addReward";
 			$('#iframe_window_idt').attr("src",url).width(700).height(300);
 			$('#qwindow_maskt').show();
 			$('#qwindowt').show();
 }
 
-function deleteborrow(borrowid){
+function deletereward(rewardid){
 			$.ajax({
 	                cache: true,
 	                type: "POST",
-	                url:"${request.contextPath}/mangerAction!deleteBorrow.action?borrowId="+borrowid,
+	                url:"${request.contextPath}/RewardAction!deleteBorrow.action?rewardId="+rewardid,
 	                async: false,
 	                error: function(request) {
 	                    alert("删除失败！");
 	                },
 	                success: function(data) {
 	                	alert('删除成功！');
-	                	$("#borrowForm").submit();
+	                	$("#rewardForm").submit();
 	                }
 	            });
 }
 
-function updateborrow(borrowid){
-	var url="${request.contextPath}/mangerAction!toPage?pageName=update&borrowId="+borrowid;
+function updatereward(rewardid){
+	var url="${request.contextPath}/RewardAction!toPage?pageName=update&rewardId="+rewardid;
 			$('#iframe_window_idt').attr("src",url).width(700).height(300);
 			$('#qwindow_maskt').show();
 			$('#qwindowt').show();
@@ -96,10 +111,6 @@ function hiddeniframes(){
 function hiddeniframesandsub(){
 				$('#qwindow_maskt').hide();
 				$('#qwindowt').hide();
-				$("#borrowForm").submit();
+				$("#rewardForm").submit();
 }
-$(function(){
-	$('#source').val('${bf.source!}');
-	$('#status').val('${bf.status!}');
-})
 </script>

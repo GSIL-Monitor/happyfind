@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="happyview.mapper.GetGetRewardInformationMapper">
+<mapper namespace="happyview.mapper.GetRewardInformationMapper">
 	
 	<resultMap id="GetRewardInformationMapper" type="happyview.entity.GetRewardInformation">
 		<result property="id" column="id" />
@@ -23,27 +23,33 @@
 	
 	
 	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
-	      select * from getreward_information where deleteFlag is null
-	      <if test="name!=null and name !=''"> and name = #{name}	</if>
-	      <if test="type!=null and type !=''"> and type = #{type}	</if>
+	      select 
+				a.id,
+				a.name,
+				a.id_card,
+				a.loan_time,
+				a.loan_mount,
+				a.release_time,
+				a.reward_amount,
+				a.type,
+				b.contact_number1,
+				b.contact_number2,
+				b.contact_number3
+		  from reward_information a,getreward_information b
+		  where a.id=b.id and a.deleteFlag = 0
+	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
+	      <if test="type!=null and type !=''"> and a.type = #{type}	</if>
 	</select>
 
 	<insert id="addEntity" parameterType="GetRewardInformation">
-		INSERT INTO getreward_information(name,id_card,loan_time,loan_mount,release_time,
-		reward_amount,type,moduser,
-		modtime,updateTime,deleteFlag)
-		VALUES (
-		#{name},#{idCard},#{loantime},#{loanmount},#{releasetime},
-		#{rewardamount},
-		#{type},#{moduser},#{modtime},#{updateTime},#{deleteFlag}	)
+		INSERT INTO getreward_information(contact_number1,contact_number2,contact_number3)
+		VALUES (#{contactnumber1},#{contactnumber2},#{contactnumber3})
 	</insert>
 	
 	<update id="updateEntity"  parameterType="GetRewardInformation">  
         UPDATE getreward_information SET 
-        name=#{name},id_card=#{idCard},loan_time=#{loantime},
-        loan_mount=#{loan_mount},release_time=#{releasetime},
-        reward_amount=#{rewardamount},type=#{type},
-        moduser=#{moduser},modtime=#{modtime},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
+        contact_number1=#{contactnumber1},contact_number2=#{contactnumber2},
+        contact_number3=#{contactnumber3}
         where id = #{id} 
     </update> 
     
@@ -55,8 +61,21 @@
     </update> 
     
     <select id="getEntityById" resultMap="GetRewardInformationMapper"  parameterType="int">
-	      select * from getreward_information where deleteFlag is null
-	      <if test="rewardId!=0"> and id = #{rewardId!=0}	</if>
+	      select 
+				a.id,
+				a.name,
+				a.id_card,
+				a.loan_time,
+				a.loan_mount,
+				a.release_time,
+				a.reward_amount,
+				a.type,
+				b.contact_number1,
+				b.contact_number2,
+				b.contact_number3
+		  from reward_information a,getreward_information b
+		  where a.id=b.id and a.deleteFlag = 0
+	      <if test="getrewardId!=0"> and a.id = #{getrewardId}	</if>
 	</select>
      
 </mapper>
