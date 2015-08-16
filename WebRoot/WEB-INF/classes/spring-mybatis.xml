@@ -22,12 +22,12 @@
 	<!-- mybatis 的SqlSession 的工厂: SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource"/>
-			<property name="typeAliasesPackage" value="dkq.entity,ces.entity,happyfind.entity"/>
+			<property name="typeAliasesPackage" value="dkq.entity,ces.entity,happyfind.entity,happyview.entity"/>
 	</bean>
 	
 	<!-- mybatis 自动扫描加载Sql 映射文件 : MapperScannerConfigurer -->
 	 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="dkq.mapper,ces.mapper,happyfind.mapper"/>
+		<property name="basePackage" value="dkq.mapper,ces.mapper,happyfind.mapper,happyview.mapper"/>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean> 
 	

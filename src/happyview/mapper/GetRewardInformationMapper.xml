@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="happyview.mapper.RewardInformationMapper">
+<mapper namespace="happyview.mapper.GetGetRewardInformationMapper">
 	
-	<resultMap id="RewardInformationMapper" type="happyview.entity.RewardInformation">
+	<resultMap id="GetRewardInformationMapper" type="happyview.entity.GetRewardInformation">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="idCard" column="id_card" />
@@ -10,6 +10,9 @@
 		<result property="loanmount" column="loan_mount" />
 		<result property="releasetime" column="release_time" />
 		<result property="rewardamount" column="reward_amount" />
+		<result property="contactnumber1" column="contact_number1" />
+		<result property="contactnumber2" column="contact_number2" />
+		<result property="contactnumber3" column="contact_number3" />
 		<result property="type" column="type" />
 		<result property="moduser" column="moduser" />
 		<result property="modtime" column="modtime" />
@@ -19,14 +22,14 @@
 	</resultMap>
 	
 	
-	<select id="getList" resultMap="RewardInformationMapper"  parameterType="RewardInformation">
-	      select * from reward_information where deleteFlag is null
+	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
+	      select * from getreward_information where deleteFlag is null
 	      <if test="name!=null and name !=''"> and name = #{name}	</if>
 	      <if test="type!=null and type !=''"> and type = #{type}	</if>
 	</select>
 
-	<insert id="addEntity" parameterType="RewardInformation">
-		INSERT INTO reward_information(name,id_card,loan_time,loan_mount,release_time,
+	<insert id="addEntity" parameterType="GetRewardInformation">
+		INSERT INTO getreward_information(name,id_card,loan_time,loan_mount,release_time,
 		reward_amount,type,moduser,
 		modtime,updateTime,deleteFlag)
 		VALUES (
@@ -35,8 +38,8 @@
 		#{type},#{moduser},#{modtime},#{updateTime},#{deleteFlag}	)
 	</insert>
 	
-	<update id="updateEntity"  parameterType="RewardInformation">  
-        UPDATE reward_information SET 
+	<update id="updateEntity"  parameterType="GetRewardInformation">  
+        UPDATE getreward_information SET 
         name=#{name},id_card=#{idCard},loan_time=#{loantime},
         loan_mount=#{loan_mount},release_time=#{releasetime},
         reward_amount=#{rewardamount},type=#{type},
@@ -44,15 +47,15 @@
         where id = #{id} 
     </update> 
     
-    <update id="deleteEntity"  parameterType="RewardInformation">  
-        UPDATE reward_information SET 
+    <update id="deleteEntity"  parameterType="GetRewardInformation">  
+        UPDATE getreward_information SET 
         updateTime=#{updateTime},
         deleteFlag=#{deleteFlag}
         where id = #{id} 
     </update> 
     
-    <select id="getEntityById" resultMap="RewardInformationMapper"  parameterType="int">
-	      select * from reward_information where deleteFlag is null
+    <select id="getEntityById" resultMap="GetRewardInformationMapper"  parameterType="int">
+	      select * from getreward_information where deleteFlag is null
 	      <if test="rewardId!=0"> and id = #{rewardId!=0}	</if>
 	</select>
      

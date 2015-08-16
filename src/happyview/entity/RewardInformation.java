@@ -7,10 +7,7 @@ public class RewardInformation {
 	private String loantime;//贷款时间
 	private String loanmount;//贷款金额
 	private String releasetime; //发布日期
-	private String rewardamount;  //悬赏金额
-	private String contactnumber1;  //
-	private String contactnumber2;   
-	private String contactnumber3;   
+	private String rewardamount;  //悬赏金额  
 	private String type;   //分为个人和机构
 	private String moduser;  //
 	private String modtime; //
@@ -65,24 +62,6 @@ public class RewardInformation {
 	}
 	public void setRewardamount(String rewardamount) {
 		this.rewardamount = rewardamount;
-	}
-	public String getContactnumber1() {
-		return contactnumber1;
-	}
-	public void setContact_number1(String contactNumber1) {
-		contactnumber1 = contactNumber1;
-	}
-	public String getContactnumber2() {
-		return contactnumber2;
-	}
-	public void setContactnumber2(String contactNumber2) {
-		contactnumber2 = contactNumber2;
-	}
-	public String getContactnumber3() {
-		return contactnumber3;
-	}
-	public void setContactnumber3(String contactNumber3) {
-		contactnumber3 = contactNumber3;
 	}
 	public String getType() {
 		return type;
