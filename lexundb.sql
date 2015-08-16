@@ -96,20 +96,12 @@ CREATE TABLE `reward_information` (
 -- ----------------------------
 DROP TABLE IF EXISTS `getreward_information`;
 CREATE TABLE `getreward_information` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '领赏信息表',
-  `name` varchar(45) DEFAULT NULL COMMENT '姓名',
-  `id_card` varchar(45) DEFAULT NULL COMMENT '身份证',
-  `loan_time` datetime DEFAULT NULL COMMENT '贷款时间',
-  `loan_mount` double DEFAULT NULL COMMENT '贷款金额',
-  `release_time` datetime DEFAULT NULL COMMENT '发布日期',
-  `reward_amount` double DEFAULT NULL COMMENT '悬赏金额',
+  `id` int(11) NOT NULL  COMMENT '领赏信息表',
   `contact_number1` varchar(45) NOT NULL,
   `contact_number2` varchar(45) DEFAULT NULL,
   `contact_number3` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL COMMENT '分为个人和机构\n',
-  `deleteFlag` int(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
