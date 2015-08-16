@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>乐寻管理平台-添加借贷信息</title>
+<title>乐寻管理平台-添加领赏信息</title>
 <script type="text/javascript" src="${request.contextPath}/js/jquery-1.3.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="${request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
 <link href="${request.contextPath}/CVE.css" rel="stylesheet" type="text/css" />
@@ -13,7 +13,7 @@
 
 <body>
 	<div class="addbox addPrice">
-    	<div class="title">添加借贷信息</div>
+    	<div class="title">添加领赏信息</div>
     	 <form id="borrowform"  method="post">
         <div class="addcon">
         	<ul id="litable">

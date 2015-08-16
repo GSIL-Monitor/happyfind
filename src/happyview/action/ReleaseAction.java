@@ -1,8 +1,8 @@
 package happyview.action;
 
-import happyview.entity.RewardInformation;
 import happyfind.entity.SystemLog;
-import happyview.service.RewardInformationServiceI;
+import happyview.entity.ReleaseInformation;
+import happyview.service.ReleaseInformationServiceI;
 import happyfind.service.SystemLogServiceI;
 import happyfind.utils.CommonData;
 
@@ -20,59 +20,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @ParentPackage(value="basePackage")
 @Namespace("/")
-@Action(value="viewAction")
+@Action(value="releaseAction")
 @Results(value = {
-@Result(name ="reward", location = "/view/rewardList.ftl"),
-@Result(name ="addReward", location = "/view/addReward.ftl"),
 @Result(name ="addRelase", location = "/view/addRelease.ftl"),
 })
-public class ViewAction {
+public class ReleaseAction {
 	
 	//参数
 	private String pageName;
 	private int rewardId;
-	private RewardInformation bf = new RewardInformation();
-	private RewardInformationServiceI RewardInformationService;
+	private ReleaseInformation release = new ReleaseInformation();
+	private ReleaseInformationServiceI releaseInformationService;
 	
 	private SystemLog log = new SystemLog();
 	private SystemLogServiceI systemLogService;
 	
 	//数据列表
-	List<RewardInformation> rewardlist=new ArrayList<RewardInformation>();
+	List<ReleaseInformation> releaselist=new ArrayList<ReleaseInformation>();
 	//时间参数
 	Date dateTime = new Date();
 	SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
 	String dateTimes = df.format(dateTime);
 	
 	public String toPageList(){
-		rewardlist=RewardInformationService.getList(bf);
+		releaselist=releaseInformationService.getList(release);
 		return pageName;
 	}
 	public String toPage(){
-		if(pageName.equals("update")){
-			bf=RewardInformationService.getEntityById(rewardId);
-		}
 		return pageName;
 	}
-	public String addReward(){
-		bf.setUpdateTime(dateTimes);
-		String logKey=CommonData.ADDREWARD;
-		if(bf.getId()==0){
-			RewardInformationService.addEntity(bf);
+	
+	public String addRelease(){
+		release.setUpdateTime(dateTimes);
+		String logKey=CommonData.ADDRELEASE;
+		if(release.getId()==0){
+			release.setModtime(dateTimes);
+			releaseInformationService.addEntity(release);
 			systemLogService.addEntity(log);
 		}else{
-			logKey=CommonData.UPDATEBORROW;
-			RewardInformationService.updateEntity(bf);
+			logKey=CommonData.UPDATERELEASE;
+			releaseInformationService.updateEntity(release);
 		}
-		log=getLogDate(bf.getModuser(),logKey,bf.getIdCard());
+		log=getLogDate(release.getModuser(),logKey,release.getIdCard());
 		return pageName;
 	}
 	
 	public void deleteBorrow(){
-		bf.setUpdateTime(dateTimes);
-		bf.setDeleteFlag(1);
-		bf.setId(rewardId);
-		RewardInformationService.deleteEntity(bf);
+		release.setUpdateTime(dateTimes);
+		release.setDeleteFlag(1);
+		release.setId(rewardId);
+		releaseInformationService.deleteEntity(release);
 	}
 
 	public SystemLog getLogDate(String LogUser,String logType,String logKey){
@@ -92,30 +89,31 @@ public class ViewAction {
 		this.pageName = pageName;
 	}
 
-	public RewardInformationServiceI getRewardInformationService() {
-		return RewardInformationService;
-	}
 	
-	@Autowired
-	public void setRewardInformationService(
-			RewardInformationServiceI RewardInformationService) {
-		this.RewardInformationService = RewardInformationService;
+	public int getRewardId() {
+		return rewardId;
 	}
-
-	public List<RewardInformation> getRewardlist() {
-		return rewardlist;
+	public void setRewardId(int rewardId) {
+		this.rewardId = rewardId;
 	}
-
-	public void setBorrowlist(List<RewardInformation> rewardlist) {
-		this.rewardlist = rewardlist;
+	public ReleaseInformation getRelease() {
+		return release;
 	}
-
-	public RewardInformation getBf() {
-		return bf;
+	public void setRelease(ReleaseInformation release) {
+		this.release = release;
 	}
-
-	public void setBf(RewardInformation bf) {
-		this.bf = bf;
+	public ReleaseInformationServiceI getReleaseInformationService() {
+		return releaseInformationService;
+	}
+	public void setReleaseInformationService(
+			ReleaseInformationServiceI releaseInformationService) {
+		this.releaseInformationService = releaseInformationService;
+	}
+	public List<ReleaseInformation> getReleaselist() {
+		return releaselist;
+	}
+	public void setReleaselist(List<ReleaseInformation> releaselist) {
+		this.releaselist = releaselist;
 	}
 	public int getrewardId() {
 		return rewardId;
