@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyview.mapper.GetRewardInformationMapper">
+	
+	<resultMap id="GetRewardInformationMapper" type="happyview.entity.GetRewardInformation">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="idCard" column="id_card" />
+		<result property="loantime" column="loan_time" />
+		<result property="loanmount" column="loan_mount" />
+		<result property="releasetime" column="release_time" />
+		<result property="rewardamount" column="reward_amount" />
+		<result property="contactnumber1" column="contact_number1" />
+		<result property="contactnumber2" column="contact_number2" />
+		<result property="contactnumber3" column="contact_number3" />
+		<result property="type" column="type" />
+		<result property="moduser" column="moduser" />
+		<result property="modtime" column="modtime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
+	      select 
+				a.id,
+				a.name,
+				a.id_card,
+				a.loan_time,
+				a.loan_mount,
+				a.release_time,
+				a.reward_amount,
+				a.type,
+				b.contact_number1,
+				b.contact_number2,
+				b.contact_number3
+		  from reward_information a,getreward_information b
+		  where a.id=b.id and a.deleteFlag = 0
+	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
+	      <if test="type!=null and type !=''"> and a.type = #{type}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="GetRewardInformation">
+		INSERT INTO getreward_information(contact_number1,contact_number2,contact_number3)
+		VALUES (#{contactnumber1},#{contactnumber2},#{contactnumber3})
+	</insert>
+	
+	<update id="updateEntity"  parameterType="GetRewardInformation">  
+        UPDATE getreward_information SET 
+        contact_number1=#{contactnumber1},contact_number2=#{contactnumber2},
+        contact_number3=#{contactnumber3}
+        where id = #{id} 
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="GetRewardInformation">  
+        UPDATE getreward_information SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="GetRewardInformationMapper"  parameterType="int">
+	      select 
+				a.id,
+				a.name,
+				a.id_card,
+				a.loan_time,
+				a.loan_mount,
+				a.release_time,
+				a.reward_amount,
+				a.type,
+				b.contact_number1,
+				b.contact_number2,
+				b.contact_number3
+		  from reward_information a,getreward_information b
+		  where a.id=b.id and a.deleteFlag = 0
+	      <if test="getrewardId!=0"> and a.id = #{getrewardId}	</if>
+	</select>
+     
+</mapper>

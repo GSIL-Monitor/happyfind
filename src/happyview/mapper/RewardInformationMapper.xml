@@ -10,6 +10,7 @@
 		<result property="loanmount" column="loan_mount" />
 		<result property="releasetime" column="release_time" />
 		<result property="rewardamount" column="reward_amount" />
+		<result property="arrearsamount" column="arrears_amount" />
 		<result property="contactnumber1" column="contact_number1" />
 		<result property="contactnumber2" column="contact_number2" />
 		<result property="contactnumber3" column="contact_number3" />
@@ -23,18 +24,17 @@
 	
 	
 	<select id="getList" resultMap="RewardInformationMapper"  parameterType="RewardInformation">
-	      select * from reward_information where deleteFlag =0
+	      select * from reward_information where deleteFlag is null
 	      <if test="name!=null and name !=''"> and name = #{name}	</if>
 	      <if test="type!=null and type !=''"> and type = #{type}	</if>
 	</select>
 
 	<insert id="addEntity" parameterType="RewardInformation">
 		INSERT INTO reward_information(name,id_card,loan_time,loan_mount,release_time,
-		reward_amount,contact_number1,contact_number2,contact_number3,type,moduser,
-		modtime,updateTime,deleteFlag)
+		reward_amount,arrears_amount,contact_number1,contact_number2,contact_number3,type,moduser,modtime,updateTime,deleteFlag)
 		VALUES (
 		#{name},#{idCard},#{loantime},#{loanmount},#{releasetime},
-		#{rewardamount},#{contactnumber1},#{contactnumber2},#{contactnumber3},
+		#{rewardamount},#{arrearsamount},#{contactnumber1},#{contactnumber2},#{contactnumber3},
 		#{type},#{moduser},#{modtime},#{updateTime},#{deleteFlag}	)
 	</insert>
 	
@@ -42,7 +42,7 @@
         UPDATE reward_information SET 
         name=#{name},id_card=#{idCard},loan_time=#{loantime},
         loan_mount=#{loan_mount},release_time=#{releasetime},
-        reward_amount=#{rewardamount},contact_number1=#{contactnumber1},
+        reward_amount=#{rewardamount},arrears_amount=#{arrearsamount},contact_number1=#{contactnumber1},
         contact_number2=#{contactnumber2},contact_number3=#{contactnumber3},type=#{type},
         moduser=#{moduser},modtime=#{modtime},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
         where id = #{id} 
@@ -56,7 +56,7 @@
     </update> 
     
     <select id="getEntityById" resultMap="RewardInformationMapper"  parameterType="int">
-	      select * from reward_information where deleteFlag=0
+	      select * from reward_information where deleteFlag is null
 	      <if test="rewardId!=0"> and id = #{rewardId!=0}	</if>
 	</select>
      

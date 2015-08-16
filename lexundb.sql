@@ -44,6 +44,10 @@ CREATE TABLE `register_company` (
   `other_number` int(11) DEFAULT NULL COMMENT '联系人其他号码',
   `email` varchar(45) DEFAULT NULL COMMENT '联系人邮箱',
   `register_time` datetime DEFAULT NULL COMMENT '注册时间',
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -69,6 +73,10 @@ CREATE TABLE `release_information` (
   `select_amount` varchar(45) DEFAULT NULL COMMENT '查询价格',
   `is_reward` varchar(45) DEFAULT NULL COMMENT '是否悬赏',
   `overdue_time` varchar(45) DEFAULT NULL COMMENT '逾期日期',
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
  
@@ -85,8 +93,15 @@ CREATE TABLE `reward_information` (
   `loan_mount` double DEFAULT NULL COMMENT '贷款金额',
   `release_time` datetime DEFAULT NULL COMMENT '发布日期',
   `reward_amount` double DEFAULT NULL COMMENT '悬赏金额',
+  `arrears_amount` double DEFAULT NULL COMMENT '欠款金额',
+  `contact_number1` varchar(45) NOT NULL,
+  `contact_number2` varchar(45) DEFAULT NULL,
+  `contact_number3` varchar(45) DEFAULT NULL,
   `type` varchar(45) DEFAULT NULL COMMENT '分为个人和机构\n',
-  `deleteFlag` int(8) DEFAULT NULL,
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
  
@@ -96,20 +111,16 @@ CREATE TABLE `reward_information` (
 -- ----------------------------
 DROP TABLE IF EXISTS `getreward_information`;
 CREATE TABLE `getreward_information` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '领赏信息表',
-  `name` varchar(45) DEFAULT NULL COMMENT '姓名',
-  `id_card` varchar(45) DEFAULT NULL COMMENT '身份证',
-  `loan_time` datetime DEFAULT NULL COMMENT '贷款时间',
-  `loan_mount` double DEFAULT NULL COMMENT '贷款金额',
-  `release_time` datetime DEFAULT NULL COMMENT '发布日期',
-  `reward_amount` double DEFAULT NULL COMMENT '悬赏金额',
+  `id` int(11) NOT NULL  COMMENT '领赏信息表',
   `contact_number1` varchar(45) NOT NULL,
   `contact_number2` varchar(45) DEFAULT NULL,
   `contact_number3` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL COMMENT '分为个人和机构\n',
-  `deleteFlag` int(8) DEFAULT NULL,
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -151,6 +162,10 @@ CREATE TABLE `supremecourt_broken_promises` (
   `obligation` varchar(45) DEFAULT NULL,
   `perform_situation` varchar(45) DEFAULT NULL,
   `perform_situation_detail` varchar(45) DEFAULT NULL,
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -168,6 +183,10 @@ CREATE TABLE `supremecourt_perform` (
   `province` varchar(45) DEFAULT NULL,
   `obligation` varchar(200) DEFAULT NULL,
   `perform_situation` varchar(200) DEFAULT NULL,
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
