@@ -15,7 +15,7 @@ public class RewardInformation {
 	private String moduser;  //
 	private String modtime; //
 	private String updateTime;  //
-	private String deleteFlag;   //1是已删除
+	private int deleteFlag;   //1是已删除
 	
 	public String getModtime() {
 		return modtime;
@@ -102,12 +102,14 @@ public class RewardInformation {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public String getDeleteFlag() {
+	public int getDeleteFlag() {
 		return deleteFlag;
 	}
-	public void setDeleteFlag(String deleteFlag) {
+	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	
+	public void setContactnumber1(String contactnumber1) {
+		this.contactnumber1 = contactnumber1;
+	}
 	
 }

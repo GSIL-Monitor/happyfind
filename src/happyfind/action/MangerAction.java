@@ -72,7 +72,7 @@ public class MangerAction {
 	
 	public void deleteBorrow(){
 		bf.setUpdateTime(dateTimes);
-		bf.setDeleteFlag("1");
+		bf.setDeleteFlag(1);
 		bf.setId(borrowId);
 		borrowInformationService.deleteEntity(bf);
 	}

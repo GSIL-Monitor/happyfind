@@ -23,7 +23,7 @@
 	
 	
 	<select id="getList" resultMap="RewardInformationMapper"  parameterType="RewardInformation">
-	      select * from reward_information where deleteFlag is null
+	      select * from reward_information where deleteFlag =0
 	      <if test="name!=null and name !=''"> and name = #{name}	</if>
 	      <if test="type!=null and type !=''"> and type = #{type}	</if>
 	</select>
@@ -56,7 +56,7 @@
     </update> 
     
     <select id="getEntityById" resultMap="RewardInformationMapper"  parameterType="int">
-	      select * from reward_information where deleteFlag is null
+	      select * from reward_information where deleteFlag=0
 	      <if test="rewardId!=0"> and id = #{rewardId!=0}	</if>
 	</select>
      

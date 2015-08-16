@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Results(value = {
 @Result(name ="reward", location = "/view/rewardList.ftl"),
 @Result(name ="addReward", location = "/view/addReward.ftl"),
+@Result(name ="addRelase", location = "/view/addRelease.ftl"),
 })
 public class ViewAction {
 	
@@ -69,7 +70,7 @@ public class ViewAction {
 	
 	public void deleteBorrow(){
 		bf.setUpdateTime(dateTimes);
-		bf.setDeleteFlag("1");
+		bf.setDeleteFlag(1);
 		bf.setId(rewardId);
 		RewardInformationService.deleteEntity(bf);
 	}
@@ -81,10 +82,6 @@ public class ViewAction {
 		log.setLogkey(CommonData.getLogKey(logKey));
 		return log;
 	}
-	
-	
-	
-	
 	
 	
 	public String getPageName() {

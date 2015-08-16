@@ -10,7 +10,7 @@ public class BorrowInformation {
 	private String modtime; //
 	private String moduser;  //
 	private String updateTime;  //
-	private String deleteFlag;   //1是已删除
+	private int deleteFlag;   //1是已删除
 	public String getUpdateTime() {
 		return updateTime;
 	}
@@ -59,12 +59,13 @@ public class BorrowInformation {
 	public String getStatus() {
 		return status;
 	}
-	public String getDeleteFlag() {
+	public int getDeleteFlag() {
 		return deleteFlag;
 	}
-	public void setDeleteFlag(String deleteFlag) {
+	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+	
 
 	
 	
