@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyview.mapper.ReleaseInformationMapper">
+	
+	<resultMap id="ReleaseInformationMap" type="happyview.entity.ReleaseInformation">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="idCard" column="id_card" />
+		<result property="releaseType" column="release_type" />
+		<result property="loanAmount" column="loan_amount" />
+		<result property="releaseTime" column="release_time" />
+		
+		<result property="loanTime" column="loan_time" />
+		<result property="loanInstitutions" column="loan_institutions" />
+		<result property="debtAmount" column="debt_amount" />
+		<result property="loanTimelimit" column="loan_timelimit" />
+		<result property="overdueTime" column="overdue_time" />
+		<result property="selectAmount" column="select_amount" />
+		<result property="isAnonymity" column="is_anonymity" />
+		<result property="contactnumber1" column="contact_number1" />
+		<result property="contactnumber2" column="contact_number2" />
+		<result property="contactnumber3" column="contact_number3" />
+		<result property="type" column="type" />
+		<result property="moduser" column="moduser" />
+		<result property="modtime" column="modtime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+	</resultMap>
+	
+	<select id="getList" resultMap="ReleaseInformationMap"  parameterType="ReleaseInformation">
+	      select * from release_information where deleteFlag =0
+	      <if test="name!=null and name !=''"> and name = #{name}	</if>
+	      <if test="type!=null and type !=''"> and type = #{type}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="ReleaseInformation">
+		INSERT INTO release_information(name)
+		VALUES (
+		#{name}	)
+	</insert>
+	
+	<update id="updateEntity"  parameterType="ReleaseInformation">  
+        UPDATE release_information SET 
+        name=#{name},id_card=#{idCard},release_type=#{releaseType},loan_amount=#{loanAmount},loan_time=#{loanTime},
+        loan_timelimit=#{loanTimelimit},overdue_time=#{overdueTime},
+        select_amount=#{selectAmount},is_anonymity=#{isAnonymity},
+        contact_number1=#{contactnumber1},
+        contact_number2=#{contactnumber2},contact_number3=#{contactnumber3},type=#{type},
+        moduser=#{moduser},modtime=#{modtime},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="ReleaseInformation">  
+        UPDATE release_information SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="ReleaseInformationMap"  parameterType="int">
+	      select * from release_information where deleteFlag is null
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+     
+</mapper>
