@@ -111,7 +111,8 @@ CREATE TABLE `reward_information` (
 -- ----------------------------
 DROP TABLE IF EXISTS `getreward_information`;
 CREATE TABLE `getreward_information` (
-  `id` int(11) NOT NULL  COMMENT '领赏信息表',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '领赏自增列',
+  `reward_id` int(11) NOT NULL  COMMENT '悬赏id',
   `contact_number1` varchar(45) NOT NULL,
   `contact_number2` varchar(45) DEFAULT NULL,
   `contact_number3` varchar(45) DEFAULT NULL,
