@@ -4,16 +4,16 @@
 	
 	<resultMap id="GetRewardInformationMapper" type="happyview.entity.GetRewardInformation">
 		<result property="id" column="id" />
-		<result property="name" column="name" />
-		<result property="idCard" column="id_card" />
-		<result property="loantime" column="loan_time" />
-		<result property="loanmount" column="loan_mount" />
-		<result property="releasetime" column="release_time" />
-		<result property="rewardamount" column="reward_amount" />
+		<result property="rewardid" column="reward_id" />
 		<result property="contactnumber1" column="contact_number1" />
 		<result property="contactnumber2" column="contact_number2" />
 		<result property="contactnumber3" column="contact_number3" />
+		<result property="name" column="name" />
+		<result property="idCard" column="id_Card" />
+		<result property="rewardamount" column="reward_amount" />
 		<result property="type" column="type" />
+		<result property="getrewardname" column="getreward_name" />
+		<result property="getrewardnumber" column="getreward_number" />
 		<result property="moduser" column="moduser" />
 		<result property="modtime" column="modtime" />
 		<result property="updateTime" column="updateTime" />
@@ -24,26 +24,27 @@
 	
 	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
 	      select 
-				a.id,
-				a.name,
-				a.id_card,
-				a.loan_time,
-				a.loan_mount,
-				a.release_time,
-				a.reward_amount,
-				a.type,
-				b.contact_number1,
-				b.contact_number2,
-				b.contact_number3
-		  from reward_information a,getreward_information b
-		  where a.id=b.id and a.deleteFlag = 0
+				a.id ,
+				b.reward_id,
+				b.contact_number1 as contact_number1,
+				b.contact_number2 as contact_number2,
+				b.contact_number3 as contact_number3,
+				a.name as name,
+				a.id_card id_card,
+				a.reward_amount reward_amount,
+				a.type type,
+				b.getreward_name getreward_name,
+				b.getreward_number getreward_number
+		  from reward_information as a,getreward_information as b
+		  where a.id=b.reward_id and a.deleteFlag = 0
 	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
 	      <if test="type!=null and type !=''"> and a.type = #{type}	</if>
 	</select>
 
 	<insert id="addEntity" parameterType="GetRewardInformation">
-		INSERT INTO getreward_information(contact_number1,contact_number2,contact_number3)
-		VALUES (#{contactnumber1},#{contactnumber2},#{contactnumber3})
+		INSERT INTO getreward_information(reward_id,getreward_name,getreward_number,contact_number1,
+		contact_number2,contact_number3)
+		VALUES (#{rewardid},#{getrewardname},#{getrewardnumber},#{contactnumber1},#{contactnumber2},#{contactnumber3})
 	</insert>
 	
 	<update id="updateEntity"  parameterType="GetRewardInformation">  
@@ -61,20 +62,20 @@
     </update> 
     
     <select id="getEntityById" resultMap="GetRewardInformationMapper"  parameterType="int">
-	      select 
-				a.id,
-				a.name,
-				a.id_card,
-				a.loan_time,
-				a.loan_mount,
-				a.release_time,
-				a.reward_amount,
-				a.type,
-				b.contact_number1,
-				b.contact_number2,
-				b.contact_number3
+	          select 
+				a.id as id,
+				b.reward_id as reward_id,
+				b.contact_number1 as contact_number1,
+				b.contact_number2 as contact_number2,
+				b.contact_number3 as contact_number3,
+				a.name as name,
+				a.id_card id_card,
+				a.reward_amount reward_amount,
+				a.type type,
+				b.getreward_name getreward_name,
+				b.getreward_number getreward_number
 		  from reward_information a,getreward_information b
-		  where a.id=b.id and a.deleteFlag = 0
+		  where a.id=b.reward_id and a.deleteFlag = 0
 	      <if test="getrewardId!=0"> and a.id = #{getrewardId}	</if>
 	</select>
      

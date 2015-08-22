@@ -52,7 +52,8 @@
                         <td>${reward.contactnumber2!}</td>
                         <td>${reward.contactnumber3!}</td>
                         <td><img src="image/0812309.png" class="update" onclick="updatereward('${reward.id!}')" title="修改"></img>
-                        		<img src="image/delete.png" class="delete" onclick="deletereward('${reward.id!}')"  title="删除"></img></td>
+                        		<img src="image/delete.png" class="delete" onclick="deletereward('${reward.id!}')"  title="删除"></img>
+                        		<img src="image/addcorn.jpg" class="delete" onclick="addgetreward('${reward.id!}')"  title="添加领赏"></img></td>
                     </tr>
                      </#list>
                     </table>
@@ -96,6 +97,13 @@ function deletereward(rewardid){
 
 function updatereward(rewardid){
 	var url="${request.contextPath}/RewardAction!toPage?pageName=update&rewardId="+rewardid;
+			$('#iframe_window_idt').attr("src",url).width(700).height(300);
+			$('#qwindow_maskt').show();
+			$('#qwindowt').show();
+}
+
+function addgetreward(rewardid){
+     var url="${request.contextPath}/GetRewardAction!toPage?pageName=addgetReward&rewardId="+rewardid;
 			$('#iframe_window_idt').attr("src",url).width(700).height(300);
 			$('#qwindow_maskt').show();
 			$('#qwindowt').show();

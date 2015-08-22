@@ -116,6 +116,8 @@ CREATE TABLE `getreward_information` (
   `contact_number1` varchar(45) NOT NULL,
   `contact_number2` varchar(45) DEFAULT NULL,
   `contact_number3` varchar(45) DEFAULT NULL,
+  `getreward_name` varchar(45) DEFAULT NULL,
+  `getreward_number` varchar(45) DEFAULT NULL,
   `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间·',
   `moduser` varchar(255) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,

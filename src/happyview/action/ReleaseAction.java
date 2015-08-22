@@ -76,7 +76,7 @@ public class ReleaseAction {
 		log.setDateTime(dateTimes);
 		log.setLogUser(LogUser);
 		log.setLogType(logType);
-		log.setLogkey(CommonData.getLogKey(logKey));
+		log.setLogkey(logKey);
 		return log;
 	}
 	

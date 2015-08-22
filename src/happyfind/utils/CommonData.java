@@ -7,6 +7,8 @@ public class CommonData {
 	public static final String UPDATEREWARD="updateReward" ;
 	public static final String ADDRELEASE="addRelease" ;
 	public static final String UPDATERELEASE="updateRelease" ;
+	public static final String ADDGETREWARD="addGetReward" ;
+	public static final String UPDATEGETREWARD="updateGetReward" ;
 	
 	public static String getLogKey(String key){
 		String keyValue=null;
@@ -22,6 +24,10 @@ public class CommonData {
 			keyValue="增加举报信息";
 		}else if(key.equals("updateRelease")){
 			keyValue="修改举报信息";
+		}else if(key.equals("addGetReward")){
+			keyValue="增加领赏信息";
+		}else if(key.equals("updateGetReward")){
+			keyValue="修改领赏信息";
 		}
 		return keyValue;
 	}
