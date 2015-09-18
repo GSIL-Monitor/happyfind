@@ -227,3 +227,28 @@ CREATE TABLE `user` (
   `city` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `find_people` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '借贷信息表',
+  `name` varchar(45) DEFAULT NULL COMMENT '姓名',
+  `idcard` varchar(45) DEFAULT NULL COMMENT '身份证',
+  `age` varchar(45) DEFAULT NULL COMMENT '年龄',
+  `origin` varchar(45) DEFAULT NULL COMMENT '籍贯',
+  `residence` varchar(200) DEFAULT NULL COMMENT '居住地',
+  `rightsplace` varchar(200) DEFAULT NULL COMMENT '债券发生地',
+  `phonenumber` varchar(20) DEFAULT NULL COMMENT '原联系方式1',
+  `phonenumber1` varchar(20) DEFAULT NULL COMMENT '原联系方式2',
+  `phonenumber2` varchar(20) DEFAULT NULL COMMENT '原联系方式3',
+  `missingday` varchar(20) DEFAULT NULL COMMENT '失踪天数',
+  `loanagreement` varchar(200) DEFAULT NULL COMMENT '借款协议',
+  `description` varchar(200) DEFAULT NULL COMMENT '描述',
+  `idcardcopy` varchar(200) DEFAULT NULL COMMENT '被催收人ID复印件',
+  `loancontract` varchar(200) DEFAULT NULL COMMENT '借贷合同',
+  `publishtype` varchar(20) DEFAULT NULL COMMENT '发布方类别',
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
