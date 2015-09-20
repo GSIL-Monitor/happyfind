@@ -228,7 +228,9 @@ CREATE TABLE `user` (
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+-- ----------------------------
+-- Table structure for find_people
+-- ----------------------------
 CREATE TABLE `find_people` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '借贷信息表',
   `name` varchar(45) DEFAULT NULL COMMENT '姓名',
