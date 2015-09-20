@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyview.mapper.FindPeopleInformationMapper">
+	
+	<resultMap id="FindPeopleInformationMapper" type="happyview.entity.FindPeopleInformation">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="idcard" column="idcard" />
+		<result property="age" column="age" />
+		<result property="origin" column="origin" />
+		<result property="residence" column="residence" />
+		<result property="rightsplace" column="rightsplace" />
+		<result property="phonenumber" column="phonenumber" />
+		<result property="phonenumber1" column="phonenumber1" />
+		<result property="phonenumber2" column="phonenumber2" />
+		<result property="missingday" column="missingday" />
+		<result property="loanagreement" column="loanagreement" />
+		<result property="description" column="description" />
+		<result property="idcardcopy" column="idcardcopy" />
+		<result property="loancontract" column="loancontract" />
+		<result property="publishtype" column="publishtype" />
+		<result property="modtime" column="modtime" />
+		<result property="moduser" column="moduser" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="FindPeopleInformationMapper"  parameterType="FindPeopleInformation">
+	      select * from find_people where deleteFlag is null
+	      <if test="name!=null and name !=''"> and name = #{name}	</if>
+	      <if test="idcard!=null and idcard !=''"> and idcard = #{idcard}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="FindPeopleInformation">
+		INSERT INTO find_people(name,idcard,age,origin,residence,rightsplace,phonenumber,phonenumber1,phonenumber2,
+		missingday,loanagreement,description,idcardcopy,loancontract,publishtype,modtime,moduser,updateTime,deleteFlag)
+		VALUES (
+		#{name},#{idcard},#{age},#{origin},#{residence},#{rightsplace},#{phonenumber},#{phonenumber1},#{phonenumber2},#{missingday},
+		#{loanagreement},#{description},#{idcardcopy},#{loancontract},#{publishtype},#{modtime},#{moduser},#{updateTime},#{deleteFlag}	)
+	</insert>
+	
+	<update id="updateEntity"  parameterType="FindPeopleInformation">  
+        UPDATE find_people SET 
+        name=#{name},idcard=#{idcard},age=#{age},
+        origin=#{origin},residence=#{residence},
+        rightsplace=#{rightsplace},phonenumber=#{phonenumber},phonenumber1=#{phonenumber1},
+        phonenumber2=#{phonenumber2},missingday=#{missingday},loanagreement=#{loanagreement},
+        description=#{description},idcardcopy=#{idcardcopy},loancontract=#{loancontract},publishtype=#{publishtype},
+        modtime=#{modtime},moduser=#{moduser},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
+        where id = #{id}
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="FindPeopleInformation">  
+        UPDATE find_people SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="FindPeopleInformationMapper"  parameterType="int">
+	      select * from find_people where deleteFlag is null
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+     
+</mapper>

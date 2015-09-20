@@ -35,7 +35,7 @@
 				a.type type,
 				b.getreward_name getreward_name,
 				b.getreward_number getreward_number
-		  from reward_information as a,getreward_information as b
+		  from find_people as a,getreward_information as b
 		  where a.id=b.reward_id and a.deleteFlag = 0
 	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
 	      <if test="type!=null and type !=''"> and a.type = #{type}	</if>
@@ -74,7 +74,7 @@
 				a.type type,
 				b.getreward_name getreward_name,
 				b.getreward_number getreward_number
-		  from reward_information a,getreward_information b
+		  from find_people a,getreward_information b
 		  where a.id=b.reward_id and a.deleteFlag = 0
 	      <if test="getrewardId!=0"> and a.id = #{getrewardId}	</if>
 	</select>
