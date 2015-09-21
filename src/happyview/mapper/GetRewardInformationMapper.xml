@@ -9,9 +9,8 @@
 		<result property="contactnumber2" column="contact_number2" />
 		<result property="contactnumber3" column="contact_number3" />
 		<result property="name" column="name" />
-		<result property="idCard" column="id_Card" />
-		<result property="rewardamount" column="reward_amount" />
-		<result property="type" column="type" />
+		<result property="idcard" column="idCard" />
+		<result property="publishtype" column="publishtype" />
 		<result property="getrewardname" column="getreward_name" />
 		<result property="getrewardnumber" column="getreward_number" />
 		<result property="moduser" column="moduser" />
@@ -24,21 +23,20 @@
 	
 	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
 	      select 
-				a.id ,
+				a.id,
 				b.reward_id,
 				b.contact_number1 as contact_number1,
 				b.contact_number2 as contact_number2,
 				b.contact_number3 as contact_number3,
 				a.name as name,
-				a.id_card id_card,
-				a.reward_amount reward_amount,
-				a.type type,
+				a.idcard as idcard,
+				a.publishtype as publishtype,
 				b.getreward_name getreward_name,
 				b.getreward_number getreward_number
 		  from find_people as a,getreward_information as b
 		  where a.id=b.reward_id and a.deleteFlag = 0
 	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
-	      <if test="type!=null and type !=''"> and a.type = #{type}	</if>
+	      <if test="publishtype!=null and publishtype !=''"> and a.publishtype = #{publishtype}	</if>
 	</select>
 
 	<insert id="addEntity" parameterType="GetRewardInformation">

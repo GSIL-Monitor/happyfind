@@ -7,7 +7,7 @@ public class GetRewardInformation {
 	private String contactnumber2;   
 	private String contactnumber3;   
 	private String name;
-	private String idCard;
+	private String idcard;
 	private String rewardamount;
 	private String type;
 	private String getrewardname;
