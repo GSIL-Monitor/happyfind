@@ -8,9 +8,7 @@
 		<result property="contactnumber1" column="contact_number1" />
 		<result property="contactnumber2" column="contact_number2" />
 		<result property="contactnumber3" column="contact_number3" />
-		<result property="name" column="name" />
-		<result property="idcard" column="idCard" />
-		<result property="publishtype" column="publishtype" />
+		<result property="address" column="address" />
 		<result property="getrewardname" column="getreward_name" />
 		<result property="getrewardnumber" column="getreward_number" />
 		<result property="moduser" column="moduser" />
@@ -34,9 +32,8 @@
 				b.getreward_name getreward_name,
 				b.getreward_number getreward_number
 		  from find_people as a,getreward_information as b
-		  where a.id=b.reward_id and a.deleteFlag = 0
-	      <if test="name!=null and name !=''"> and a.name = #{name}	</if>
-	      <if test="publishtype!=null and publishtype !=''"> and a.publishtype = #{publishtype}	</if>
+		  where a.id=b.id and b.deleteFlag =0
+	      <if test="id!=null and id !=''"> and a.name = #{a.id}	</if>
 	</select>
 
 	<insert id="addEntity" parameterType="GetRewardInformation">
@@ -67,14 +64,13 @@
 				b.contact_number2 as contact_number2,
 				b.contact_number3 as contact_number3,
 				a.name as name,
-				a.id_card id_card,
-				a.reward_amount reward_amount,
-				a.type type,
+				a.idcard id_card,
+				a.publishtype publishtype,
 				b.getreward_name getreward_name,
 				b.getreward_number getreward_number
 		  from find_people a,getreward_information b
-		  where a.id=b.reward_id and a.deleteFlag = 0
-	      <if test="getrewardId!=0"> and a.id = #{getrewardId}	</if>
+		  where a.id=b.id and b.deleteFlag = 0
+	      <if test="id!=0"> and a.id = #{a.id}	</if>
 	</select>
      
 </mapper>

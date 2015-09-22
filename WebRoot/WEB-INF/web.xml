@@ -2,6 +2,20 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>struts-spring-mybatis</display-name>
   
+   <servlet>
+    <description>输出验证码</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PictureCheckCode</servlet-name>
+    <servlet-class><SPAN style="COLOR: #ff0000">com.servlet.PictureCheckCode</SPAN></servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>PictureCheckCode</servlet-name>
+    <url-pattern>/<SPAN style="COLOR: #ff0000">PictureCheckCode</SPAN></url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <!-- spring配置文件位置 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>

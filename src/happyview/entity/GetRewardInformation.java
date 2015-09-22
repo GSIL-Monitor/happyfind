@@ -6,10 +6,7 @@ public class GetRewardInformation {
 	private String contactnumber1;  //
 	private String contactnumber2;   
 	private String contactnumber3;   
-	private String name;
-	private String idcard;
-	private String rewardamount;
-	private String type;
+	private String address;
 	private String getrewardname;
 	private String getrewardnumber;
 	private String moduser;  //
@@ -47,29 +44,23 @@ public class GetRewardInformation {
 	public void setContactnumber3(String contactnumber3) {
 		this.contactnumber3 = contactnumber3;
 	}
-	public String getName() {
-		return name;
+	public String getAddress() {
+		return address;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getIdCard() {
-		return idCard;
+	public String getGetrewardname() {
+		return getrewardname;
 	}
-	public void setIdCard(String idCard) {
-		this.idCard = idCard;
+	public void setGetrewardname(String getrewardName) {
+		getrewardname = getrewardName;
 	}
-	public String getRewardamount() {
-		return rewardamount;
+	public String getGetrewardnumber() {
+		return getrewardnumber;
 	}
-	public void setRewardamount(String rewardamount) {
-		this.rewardamount = rewardamount;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+	public void setGetrewardnumber(String getrewardNumber) {
+		getrewardnumber = getrewardNumber;
 	}
 	public String getModuser() {
 		return moduser;
@@ -95,19 +86,8 @@ public class GetRewardInformation {
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	public String getGetrewardname() {
-		return getrewardname;
-	}
-	public void setGetrewardname(String getrewardname) {
-		this.getrewardname = getrewardname;
-	}
-	public String getGetrewardnumber() {
-		return getrewardnumber;
-	}
-	public void setGetrewardnumber(String getrewardnumber) {
-		this.getrewardnumber = getrewardnumber;
-	}
-
+	
+	
 	
 	
 }
