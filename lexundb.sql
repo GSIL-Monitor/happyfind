@@ -256,3 +256,39 @@ CREATE TABLE `find_people` (
   `deleteFlag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for righ_debt
+-- ----------------------------
+
+CREATE TABLE `right_debt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL COMMENT '1定价标；2竞价标',
+  `rightname` varchar(45) DEFAULT NULL COMMENT '债权人姓名',
+  `rightaddress` varchar(45) DEFAULT NULL COMMENT '债权人地址',
+  `rightphone` varchar(45) DEFAULT NULL COMMENT '债权人电话',
+  `rightidcard` varchar(45) DEFAULT NULL COMMENT '债权人身份证号或营业执照注册号',
+  `rightcontact` varchar(200) DEFAULT NULL COMMENT '债权人联系人',
+  `rightcontactphone` varchar(200) DEFAULT NULL COMMENT '债权方联系人电话',
+  `rightamount` varchar(20) DEFAULT NULL COMMENT '债权金额',
+  `disposalmethod` varchar(200) DEFAULT NULL COMMENT '期望处置方式及回报',
+  `latedays` varchar(20) DEFAULT NULL COMMENT '逾期时间',
+  `guaranteemethod` varchar(20) DEFAULT NULL COMMENT '担保方式',
+  `collectionmeasures` varchar(200) DEFAULT NULL COMMENT '催收措施',
+  `voucher` varchar(200) DEFAULT NULL COMMENT '上传相关凭证',
+  `rightdesc` varchar(200) DEFAULT NULL COMMENT '债权描述',
+  `debtname` varchar(200) DEFAULT NULL COMMENT '债务方姓名',
+  `debtaddress` varchar(20) DEFAULT NULL COMMENT '债务方地址',
+  `debtphone1` varchar(255) DEFAULT NULL COMMENT '债务方电话1',
+  `debtphone2` varchar(255) DEFAULT NULL COMMENT '债务方电话2',
+  `debtphone3` varchar(255) DEFAULT NULL COMMENT '债务方电话3',
+  `debtidcard` varchar(45) DEFAULT NULL COMMENT '债务方证件',
+  `debtiscontact` varchar(255) DEFAULT NULL COMMENT '1可联系；2已失联',
+  `debtispay` varchar(255) DEFAULT NULL COMMENT '1可以；2不可以；3不确定',
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) COMMENT='定价标和竞价标' ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+

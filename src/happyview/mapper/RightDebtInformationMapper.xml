@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyview.mapper.RightDebtInformationMapper">
+	
+	<resultMap id="FindPeopleInformationMapper" type="happyview.entity.RightDebtInformation">
+		<result property="id" column="id" />
+		<result property="type" column="type" />
+		<result property="rightname" column="rightname" />
+		<result property="rightaddress" column="rightaddress" />
+		<result property="rightphone" column="rightphone" />
+		<result property="rightidcard" column="rightidcard" />
+		<result property="rightcontact" column="rightcontact" />
+		<result property="rightcontactphone" column="rightcontactphone" />
+		<result property="rightamount" column="rightamount" />
+		<result property="disposalmethod" column="disposalmethod" />
+		<result property="latedays" column="latedays" />
+		<result property="guaranteemethod" column="guaranteemethod" />
+		<result property="collectionmeasures" column="collectionmeasures" />
+		<result property="voucher" column="voucher" />
+		<result property="rightdesc" column="rightdesc" />
+		<result property="debtname" column="debtname" />
+		<result property="debtaddress" column="debtaddress" />
+		<result property="debtphone1" column="debtphone1" />
+		<result property="debtphone2" column="debtphone2" />
+		<result property="debtphone3" column="debtphone3" />
+		<result property="debtidcard" column="debtidcard" />
+		<result property="debtiscontact" column="debtiscontact" />
+		<result property="debtispay" column="debtispay" />
+		<result property="modtime" column="modtime" />
+		<result property="moduser" column="moduser" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="RightDebtInformationMapper"  parameterType="RightDebtInformation">
+	      select * from right_debt where deleteFlag is null
+	      <if test="name!=null and name !=''"> and type = #{type}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="RightDebtInformation">
+		INSERT INTO right_debt(type,rightname,rightaddress,rightphone,rightidcard,rightcontact,rightcontactphone,rightamount,disposalmethod,latedays,
+		guaranteemethod,collectionmeasures,voucher,rightdesc,debtname,debtaddress,debtphone1,debtphone2,debtphone3,debtidcard,debtiscontact,
+		debtispay,modtime,moduser,updateTime,deleteFlag)
+		VALUES (
+		#{type},#{rightname},#{rightaddress},#{rightphone},#{rightidcard},#{rightcontact},#{rightcontactphone},#{rightamount},#{disposalmethod},#{latedays},
+		#{guaranteemethod},#{collectionmeasures},#{voucher},#{rightdesc},#{debtname},#{debtaddress},#{debtphone1},#{debtphone2},#{debtphone3},
+		#{debtidcard},#{debtiscontact},#{debtispay},#{modtime},#{moduser},#{updateTime},#{deleteFlag})
+	</insert>
+	
+	<update id="updateEntity"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+		type=#{type},rightname=#{rightname},rightaddress=#{rightaddress},rightphone=#{rightphone},
+        rightidcard=#{rightidcard},rightcontact=#{rightcontact},rightcontactphone=#{rightcontactphone},
+        rightamount=#{rightamount},disposalmethod=#{disposalmethod},latedays=#{latedays},
+        guaranteemethod=#{guaranteemethod},collectionmeasures=#{collectionmeasures},voucher=#{voucher},
+        rightdesc=#{rightdesc},debtname=#{debtname},debtaddress=#{debtaddress},debtphone1=#{debtphone1},
+        debtphone2=#{debtphone2},debtphone3=#{debtphone3},debtidcard=#{debtidcard},debtiscontact=#{debtiscontact},
+        debtispay=#{debtispay},modtime=#{modtime},moduser=#{moduser},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
+        where id = #{id}
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="RightDebtInformationMapper"  parameterType="int">
+	      select * from right_debt where deleteFlag is null
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+     
+</mapper>
