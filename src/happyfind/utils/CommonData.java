@@ -13,6 +13,8 @@ public class CommonData {
 	public static final String UPDATEFINDPEOPLE="updateFindPeople" ;
 	public static final String ADDRIGHTDEBT="addRightDebt" ;
 	public static final String UPDATERIGHTDEBT="updateRightDebt" ;
+	public static final String ADDQUALITYCONFIRM="addQualityConfirm" ;
+	public static final String UPDATEQUALITYCONFIRM="updateQualityConfirm" ;
 	
 	public static String getLogKey(String key){
 		String keyValue=null;
@@ -40,6 +42,10 @@ public class CommonData {
 			keyValue="增加竞价定价信息";
 		}else if(key.equals("updateRightDebt")){
 			keyValue="修改竞价定价信息";
+		}else if(key.equals("addQualityConfirm")){
+			keyValue="增加资格认证信息";
+		}else if(key.equals("updateQualityConfirm")){
+			keyValue="修改资格认证信息";
 		}
 		return keyValue;
 	}

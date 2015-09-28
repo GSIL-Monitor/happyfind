@@ -292,3 +292,36 @@ CREATE TABLE `right_debt` (
   PRIMARY KEY (`id`)
 ) COMMENT='定价标和竞价标' ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for qualification_confirm
+-- ----------------------------
+
+
+CREATE TABLE `quality_confirm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL COMMENT '1个人用户认证；2企业用户认证',
+  `userid` varchar(45) DEFAULT NULL COMMENT '个人用户姓名',
+  `username` varchar(45) DEFAULT NULL COMMENT '个人用户姓名',
+  `idcard` varchar(45) DEFAULT NULL COMMENT '个人用户身份证号',
+  `profession` varchar(45) DEFAULT NULL COMMENT '个人用户职业',
+  `province` varchar(45) DEFAULT NULL COMMENT '个人用户所在地省份',
+  `prefecturecity;` varchar(200) DEFAULT NULL COMMENT '个人用户所在地地级市',
+  `area` varchar(200) DEFAULT NULL COMMENT '个人用户所在地市区',
+  `uploadidcard` varchar(20) DEFAULT NULL COMMENT '个人用户上传身份证',
+  `email` varchar(200) DEFAULT NULL COMMENT '个人用户邮箱',
+  `companyname` varchar(20) DEFAULT NULL COMMENT '企业名称',
+  `companyidcard` varchar(20) DEFAULT NULL COMMENT '企业证件号',
+  `companyprovince` varchar(45) DEFAULT NULL COMMENT '企业所在地省份',
+  `companyprefecturecity` varchar(200) DEFAULT NULL COMMENT '企业用户所在地地级市',
+  `companyarea` varchar(200) DEFAULT NULL COMMENT '企业所在地市区',
+  `uploadcompanyareaidcard` varchar(20) DEFAULT NULL COMMENT '企业上传证件',
+  `legalname` varchar(200) DEFAULT NULL COMMENT '企业法定代表人',
+  `companysize` varchar(200) DEFAULT NULL COMMENT '企业规模',
+  `companyemail` varchar(200) DEFAULT NULL COMMENT '企业邮箱',
+  `modtime` varchar(255) DEFAULT NULL COMMENT '录入时间',
+  `moduser` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `deleteFlag` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) COMMENT='资格认证包含个人和企业信息' ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+

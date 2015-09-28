@@ -29,7 +29,7 @@ public class LoginCodeServlet extends HttpServlet {
             throws ServletException, IOException {    
          //设置输出类型和浏览器不保存缓存  
          response.setContentType("image/jpeg") ;  
-         response.setHeader("Cache-Control", "no-cache") ;  
+         response.setHeader("Cache-Control", "no-cache");  
            
          //创建图片对象  
          int width = 60,height = 20 ;  
